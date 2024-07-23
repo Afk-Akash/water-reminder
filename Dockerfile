@@ -1,5 +1,5 @@
 # Use the official Python image from the Docker Hub
-FROM python:3.9-bullseye
+FROM artifactory.idfcfirstbank.com/etoll-docker/python:3.9-bullseye
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
@@ -25,5 +25,7 @@ RUN crontab /etc/cron.d/my-cron-job
 # Create the log file to be able to run tail
 RUN touch /var/log/cron.log
 
+EXPOSE 8080
+
 # Run the command on container startup
-CMD cron && tail -f /var/log/cron.log
+CMD ["python", "server.py"]
